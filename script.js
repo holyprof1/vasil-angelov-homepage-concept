@@ -1,4 +1,82 @@
 // ============================================
+// IMAGE SLIDESHOW FUNCTIONALITY
+// ============================================
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const indicators = document.querySelectorAll('.indicator');
+const prevBtn = document.querySelector('.slide-btn.prev');
+const nextBtn = document.querySelector('.slide-btn.next');
+const autoPlayInterval = 5000; // 5 seconds
+let slideInterval;
+
+function showSlide(index) {
+    // Remove active class from all slides and indicators
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    // Add active class to current slide and indicator
+    slides[index].classList.add('active');
+    indicators[index].classList.add('active');
+    
+    currentSlide = index;
+}
+
+function nextSlide() {
+    let next = (currentSlide + 1) % slides.length;
+    showSlide(next);
+}
+
+function prevSlide() {
+    let prev = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(prev);
+}
+
+// Auto-play slideshow
+function startAutoPlay() {
+    slideInterval = setInterval(nextSlide, autoPlayInterval);
+}
+
+function stopAutoPlay() {
+    clearInterval(slideInterval);
+}
+
+// Event listeners for manual controls
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        startAutoPlay();
+    });
+}
+
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        startAutoPlay();
+    });
+}
+
+// Indicator click events
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+        stopAutoPlay();
+        showSlide(index);
+        startAutoPlay();
+    });
+});
+
+// Pause on hover
+const heroImage = document.querySelector('.hero-image');
+if (heroImage) {
+    heroImage.addEventListener('mouseenter', stopAutoPlay);
+    heroImage.addEventListener('mouseleave', startAutoPlay);
+}
+
+// Start auto-play on page load
+startAutoPlay();
+
+// ============================================
 // HAMBURGER MENU TOGGLE
 // ============================================
 const hamburger = document.getElementById('hamburger');
@@ -39,7 +117,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ============================================
 // PARALLAX EFFECT ON HERO IMAGE
 // ============================================
-const heroImage = document.querySelector('.artist-photo');
+const heroSlideshow = document.querySelector('.image-slideshow');
 const heroContent = document.querySelector('.hero-content');
 
 window.addEventListener('mousemove', (e) => {
@@ -51,8 +129,8 @@ window.addEventListener('mousemove', (e) => {
         const moveX = (mouseX - 0.5) * 20;
         const moveY = (mouseY - 0.5) * 20;
         
-        if (heroImage) {
-            heroImage.style.transform = `translate(${moveX}px, ${moveY}px) scale(1)`;
+        if (heroSlideshow) {
+            heroSlideshow.style.transform = `translate(${moveX}px, ${moveY}px)`;
         }
         
         if (heroContent) {
@@ -247,8 +325,8 @@ function handleResize() {
     
     // Disable parallax on mobile
     if (width <= 768) {
-        if (heroImage) {
-            heroImage.style.transform = 'none';
+        if (heroSlideshow) {
+            heroSlideshow.style.transform = 'none';
         }
         if (heroContent) {
             heroContent.style.transform = 'none';
