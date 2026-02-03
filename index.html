@@ -71,12 +71,41 @@
                 </div>
             </div>
 
-            <!-- Right Panel - Image -->
+            <!-- Right Panel - Image Slideshow -->
             <div class="hero-image">
                 <div class="image-overlay"></div>
-                <div class="image-container">
-                    <!-- Placeholder for artist image -->
-                    <div class="artist-photo"></div>
+                <div class="image-slideshow">
+                    <!-- Image 1: Dark moody cathedral shot (PRIMARY) -->
+                    <div class="slide active" style="background-image: url('1.png');"></div>
+                    
+                    <!-- Image 3: Formal B&W portrait -->
+                    <div class="slide" style="background-image: url('3.png');"></div>
+                    
+                    <!-- Image 2: Random shot -->
+                    <div class="slide" style="background-image: url('2.png');"></div>
+                    
+                    <!-- Image 5: Random shot -->
+                    <div class="slide" style="background-image: url('5.png');"></div>
+                </div>
+                
+                <!-- Slideshow Controls -->
+                <div class="slideshow-controls">
+                    <button class="slide-btn prev" aria-label="Previous image">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="slide-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                        <span class="indicator" data-slide="3"></span>
+                    </div>
+                    <button class="slide-btn next" aria-label="Next image">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
                 
                 <!-- Geometric Accent -->
